@@ -17,14 +17,44 @@ class Boundary {
         c.fillRect(this.position.x, this.position.y, this.width, this.height) // [devi creare una istanza per poter vedere il boundary nello schermo e fare una call di draw() SULLA istanza]
     }
 }
+// boundaries most efficient method: create an array made of string arrays. each string array within the array has six strings
+// and you have four of these arrays. so you are kinda replicating a perimeter with a 6 cols * 4 rows.
+// populate each string of these 4 arrays with  a '-' or ' ': '-' = boundary, ' ' = space for movement;
+// you'll loop trough the boundary by assigning a .forEach to map. for each string inside the parameter, the callback will operate some sort of conditional rendering;
 
-const boundary = new Boundary(   // il parametro position va DENTRO un oggetto: lo hai dichiarato cosi' nella classe. altrimenti non viene letto da js perche' non viene stabilita' identita', a livello sintattico, tra il parametro dell'istanza e del costruttore.
+const map = [                        //.forEach(row, i)
+    ['-', '-', '-', '-', '-', '-',], // i = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
+    ['-', ' ', ' ', ' ', ' ', '-',], // i = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', ' ', ' ', ' ', '-',], // i = 2              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
+    ['-', '-', '-', '-', '-', '-',]  // i = 3              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
+];
+const boundaries = [];                  // questo array viene popolato tramite .push() di istanze Boundary grazie al .forEach() su symbol dentro il .forEach() di map.
+
+map.forEach((row) =>
     {
-        position: {
-            x: 0,
-            y: 0,
+        row.forEach((symbol, i) => {    // per evitare la sobrapposizione delle istanze nella stessa position, ti serve un secondo parametro i
+            switch(symbol) {
+                case '-':
+                    boundaries.push(
+                        new Boundary({
+                            position: {   // se lascio x ed y a 0 non ho un rendering dinamico === tutte le istanze di boundary dentro boundaries, create col for each di map, finiranno tutte nello stesso punto;
+                                x: 0,
+                                y: 40 * i, // disponi ogni row
+                            }
+                        })
+                        )
+                    break;
+                case ' ':
+                    break;
+            }
         }
-    }
+        )
+     }
 )
-boundary.draw();
+
+
+boundaries.forEach((boundary) => {
+    boundary.draw();
+})
+
 

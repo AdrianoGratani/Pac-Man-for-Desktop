@@ -1,4 +1,4 @@
-# STEP_BY_STEP
+# STEP_BY_STEP      // https://www.youtube.com/watch?v=5IMXpp3rohQ
 
 1.  project setup;
     - generated canvas;
@@ -22,6 +22,61 @@
     assign an object as parameter. and create a key named position [ ... so that `position` in the instance === `position` of this.position === reference between the class and the instance, achieved by sintax identity ];
     - position key has in turn an object as its value. this object stores x and y.
     why another obhect? because in the draw() function within the class, when we called the fillRect method from the context, we specified the location of the position by using the dot notation [this.position.x] so is like: instance = new ThisInstance({position:{x: 0, y: 0}})
+
+        
+    // ok hai creato un boundary ma come fai a creare tutti gli altri? puoi fare cosi', ma NON E' PER NULLA EFFICIENTE:// const boundary2 = new Boundary(
+    //     {
+    //         position: {
+    //             x: 41,
+    //             y: 0,
+    //         }
+    //     }
+    // )
+    // boundary2.draw();
+
+    // 2. piu' efficiente ma ancora inperfetto: elemina le const per istanze singole di Boundary e affidale ad un unico array di oggetti
+    /*  per il rendering su browser usi un forEach con parametro (boundary) e alla calback => affidi: { buondary.draw() }
+    
+    const boundary = new Boundary(   // il parametro position va DENTRO un oggetto: lo hai dichiarato cosi' nella classe. altrimenti non viene letto da js perche' non viene stabilita' identita', a livello sintattico, tra il parametro dell'istanza e del costruttore.
+    {
+        position: {
+            x: 0,
+            y: 0,
+        }
+    }
+    )
+    boundary.draw();
+
+    const boundaries = [
+    new Boundary(
+        {
+            position: {
+                x: 0,
+                y: 0,
+            }
+        }
+    ),
+    new Boundary(
+        {
+            position: {
+                x: 41,        // l'inefficenza sta qui: devi definire ogni singola posizione di ogni istanza;
+                y: 0,
+            }
+        }
+    ),
+    new Boundary(
+        {
+            position: {
+                x: 82,
+                y: 0,
+            }
+        }
+    ),
+    ... etc etc etc
+    ]
+    boundaries.forEach((boundary) => {boundary.draw()})
+
+    */
 
 3.  add Pacman, with movement;
 4.  add collision detention;
