@@ -21,17 +21,38 @@ class Boundary {
         c.fillRect(this.position.x, this.position.y, this.width, this.height) // [devi creare una istanza per poter vedere il boundary nello schermo e fare una call di draw() SULLA istanza]
     }
 }
+
+// class for the players: pacman and its enemies: both are round and share the same size, so one class for many istancies;
+
+class Player{
+    constructor({position, velocity}){
+        this.position = position;
+        this.velocity = velocity;
+        this.radius = 10;
+    }
+
+    draw(){
+        c.beginPath();
+        c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)     // rules to draw the circle shape;
+        c.fillStyle = 'yellow';
+        c.fill();
+        c.closePath();
+    }    // this function has to be assigned to the class === the functionality for the instances to be displayed in the game has to be inherent to their respective class;
+    
+}
+
+// LO SPAZIO DEL GIOCO == LA MAPPA
 // boundaries most efficient method: create an array made of string arrays. each string array within the array has six strings
 // and you have four of these arrays. so you are kinda replicating a perimeter with a 6 cols * 4 rows.
 // populate each string of these 4 arrays with  a '-' or ' ': '-' = boundary, ' ' = space for movement;
 // you'll loop trough the boundary by assigning a .forEach to map. for each string inside the parameter, the callback will operate some sort of conditional rendering;
 
-const map = [                        //.forEach(row, i)
-    ['-', '-', '-', '-', '-', '-',], // i = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
-    ['-', ' ', ' ', ' ', ' ', '-',], // i = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-    ['-', ' ', '-', '-', ' ', '-',], // i = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-    ['-', ' ', ' ', ' ', ' ', '-',], // i = 2              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
-    ['-', '-', '-', '-', '-', '-',]  // i = 3              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
+const map = [// i    i    i    i     //.forEach(row, i)
+    ['-', '-', '-', '-', '-', '-',], // j = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
+    ['-', ' ', ' ', ' ', ' ', '-',], // j = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', '-', '-', ' ', '-',], // j = 2              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', ' ', ' ', ' ', '-',], // j = 3              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
+    ['-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
 ];
 const boundaries = [];                  // questo array viene popolato DINAMICAMENTE tramite .push() di istanze Boundary grazie al .forEach() su symbol dentro il .forEach() di map.
 
@@ -61,9 +82,24 @@ map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x
      }
 )
 
+// le istanze dei giocatori:
+const player = new Player({          // tra parentesi metti i parametri da mandare al constructor per inizializzare 'this'
+    position: {
+        x: 40,
+        y: 0,
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    }
+})                                 // per poter visualizzare la istanza devi fare la call di draw() che sta nella classe;
 
-boundaries.forEach((boundary) => {
+
+
+boundaries.forEach((boundary) => {    // fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
     boundary.draw();
 })
+
+player.draw();
 
 
