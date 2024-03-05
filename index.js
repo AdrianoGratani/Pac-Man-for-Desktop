@@ -28,7 +28,7 @@ class Player{
     constructor({position, velocity}){
         this.position = position;
         this.velocity = velocity;
-        this.radius = 10;
+        this.radius = 15;
     }
 
     draw(){
@@ -39,6 +39,11 @@ class Player{
         c.closePath();
     }    // this function has to be assigned to the class === the functionality for the instances to be displayed in the game has to be inherent to their respective class;
     
+    update() {                  // update deve andare in un infinite loop per riaggiornare la pagina di continuo , ovvero animate(), insieme all'animazione del boundary;
+        this.draw();   // lo ridisegni di bolta in volta ...
+        this.position.x += this.velocity.x          // nella posizione aggiornata dalla sua velocita in direzione x o y
+        this.position.y += this.velocity.y
+    }
 }
 
 // LO SPAZIO DEL GIOCO == LA MAPPA
@@ -55,6 +60,18 @@ const map = [// i    i    i    i     //.forEach(row, i)
     ['-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
 ];
 const boundaries = [];                  // questo array viene popolato DINAMICAMENTE tramite .push() di istanze Boundary grazie al .forEach() su symbol dentro il .forEach() di map.
+
+// le istanze dei giocatori:
+const player = new Player({          // tra parentesi metti i parametri da mandare al constructor per inizializzare 'this'
+    position: {
+        x: Boundary.width + Boundary.width / 2,
+        y: Boundary.height + Boundary.height / 2,
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    }
+})                                 // per poter visualizzare la istanza devi fare la call di draw() che sta nella classe;
 
 map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x: 40 * j;
     {
@@ -82,24 +99,37 @@ map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x
      }
 )
 
-// le istanze dei giocatori:
-const player = new Player({          // tra parentesi metti i parametri da mandare al constructor per inizializzare 'this'
-    position: {
-        x: 40,
-        y: 0,
-    },
-    velocity: {
-        x: 0,
-        y: 0
-    }
-})                                 // per poter visualizzare la istanza devi fare la call di draw() che sta nella classe;
+/// animate () riaggiorna draw() di player e il draw() e i velocity di player() ovvero player.update() in questo infiniteloop. se non fai la call di animate() non parte niente;
+function animate() {                    // aggiorni di continuo la mappa ridisegnandola in base a boundaries. inoltre, riaggiorni il player position con update
+    requestAnimationFrame(animate)
 
-
-
-boundaries.forEach((boundary) => {    // fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
+    boundaries.forEach((boundary) => {    // fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
     boundary.draw();
-})
+    })
+    
+    player.update();
+}
 
-player.draw();
+animate()
 
 
+
+addEventListener('keydown', ({ key }) => {
+switch(key){
+    case 'w':
+        player.velocity.y  = -5;
+        break;
+    case 'a':
+        player.velocity.x  = -5;
+        break;
+    case 's':
+        player.velocity.y  = 5;
+        break;
+    case 'd':
+        player.velocity.x  = 5;
+        break;
+}
+
+console.log(player.velocity)
+  }
+)
