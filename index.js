@@ -52,15 +52,8 @@ class Player{
 // populate each string of these 4 arrays with  a '-' or ' ': '-' = boundary, ' ' = space for movement;
 // you'll loop trough the boundary by assigning a .forEach to map. for each string inside the parameter, the callback will operate some sort of conditional rendering;
 
-const map = [// i    i    i    i     //.forEach(row, i)
-    ['-', '-', '-', '-', '-', '-',], // j = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
-    ['-', ' ', ' ', ' ', ' ', '-',], // j = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-    ['-', ' ', '-', '-', ' ', '-',], // j = 2              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-    ['-', ' ', ' ', ' ', ' ', '-',], // j = 3              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
-    ['-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
-];
-const boundaries = [];                  // questo array viene popolato DINAMICAMENTE tramite .push() di istanze Boundary grazie al .forEach() su symbol dentro il .forEach() di map.
 
+const boundaries = [];                  // questo array viene popolato DINAMICAMENTE tramite .push() di istanze Boundary grazie al .forEach() su symbol dentro il .forEach() di map.
 // le istanze dei giocatori:
 const player = new Player({          // tra parentesi metti i parametri da mandare al constructor per inizializzare 'this'
     position: {
@@ -73,6 +66,22 @@ const player = new Player({          // tra parentesi metti i parametri da manda
     }
 })                                 // per poter visualizzare la istanza devi fare la call di draw() che sta nella classe;
 
+const keys = {
+    w : {pressed : false},
+    a : {pressed : false},
+    s : {pressed : false},
+    d : {pressed : false},
+}
+
+let lastKey = ''
+
+const map = [// i    i    i    i     //.forEach(row, i)
+    ['-', '-', '-', '-', '-', '-',], // j = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
+    ['-', ' ', ' ', ' ', ' ', '-',], // j = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', '-', '-', ' ', '-',], // j = 2              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', ' ', ' ', ' ', '-',], // j = 3              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
+    ['-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
+];
 map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x: 40 * j;
     {
         row.forEach((symbol, i) => {    // per evitare la sobrapposizione delle istanze nella stessa position, ti serve un secondo parametro i
@@ -102,34 +111,79 @@ map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x
 /// animate () riaggiorna draw() di player e il draw() e i velocity di player() ovvero player.update() in questo infiniteloop. se non fai la call di animate() non parte niente;
 function animate() {                    // aggiorni di continuo la mappa ridisegnandola in base a boundaries. inoltre, riaggiorni il player position con update
     requestAnimationFrame(animate)
-
+    c.clearRect(0,0, canvas.width, canvas.height)
     boundaries.forEach((boundary) => {    // fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
     boundary.draw();
     })
     
     player.update();
+    player.velocity.y = 0
+    player.velocity.x = 0
+
+    if(keys.w.pressed && lastKey === 'w') {
+        player.velocity.y = -5
+    } else if (keys.a.pressed && lastKey === 'a') {
+        player.velocity.x = -5
+    }
+    else if (keys.s.pressed && lastKey === 's') {
+        player.velocity.y = 5
+    }
+    else if (keys.d.pressed && lastKey === 'd') {
+        player.velocity.x = 5
+    }
+
+
+
+
 }
 
-animate()
 
+animate()
 
 
 addEventListener('keydown', ({ key }) => {
 switch(key){
     case 'w':
-        player.velocity.y  = -5;
+        keys.w.pressed = true;
+        lastKey = 'w'
         break;
     case 'a':
-        player.velocity.x  = -5;
+        keys.a.pressed = true;
+        lastKey = 'a'
         break;
     case 's':
-        player.velocity.y  = 5;
+        keys.s.pressed = true;
+        lastKey = 's'
         break;
     case 'd':
-        player.velocity.x  = 5;
+        keys.d.pressed = true;
+        lastKey = 'd'
         break;
 }
 
-console.log(player.velocity)
+console.log(keys.d.pressed)
+console.log(keys.s.pressed)
+
+  }
+)
+
+addEventListener('keyup', ({ key }) => {
+    switch(key){
+        case 'w':
+            keys.w.pressed = false;
+            break;
+        case 'a':
+            keys.a.pressed = false;
+            break;
+        case 's':
+            keys.s.pressed = false;
+            break;
+        case 'd':
+            keys.d.pressed = false;
+            break;
+    }
+
+    console.log(keys.d.pressed)
+    console.log(keys.s.pressed)
   }
 )
