@@ -39,10 +39,9 @@ class Player{
         c.closePath();
     }    // this function has to be assigned to the class === the functionality for the instances to be displayed in the game has to be inherent to their respective class;
     
-                                                                                                                     // muovere il player nello spazio
-    update() {                                                                                                       // update deve andare in un infinite loop per riaggiornare la pagina di continuo , ovvero animate(), insieme all'animazione del boundary;
-        this.draw();                                                                                                 // lo ridisegni di bolta in volta ...
-        this.position.x += this.velocity.x                                                                           // nella posizione aggiornata dalla sua velocita in direzione x o y
+    update() {                  // update deve andare in un infinite loop per riaggiornare la pagina di continuo , ovvero animate(), insieme all'animazione del boundary;
+        this.draw();   // lo ridisegni di bolta in volta ...
+        this.position.x += this.velocity.x          // nella posizione aggiornata dalla sua velocita in direzione x o y
         this.position.y += this.velocity.y
     }
 }
@@ -53,14 +52,15 @@ class Player{
 // populate each string of these 4 arrays with  a '-' or ' ': '-' = boundary, ' ' = space for movement;
 // you'll loop trough the boundary by assigning a .forEach to map. for each string inside the parameter, the callback will operate some sort of conditional rendering;
 
-// const map = [// i    i    i    i     //.forEach(row, i)
-//     ['-', '-', '-', '-', '-', '-',], // j = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
-//     ['-', ' ', ' ', ' ', ' ', '-',], // j = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-//     ['-', ' ', '-', '-', ' ', '-',], // j = 2              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-//     ['-', ' ', ' ', ' ', ' ', '-',], // j = 3              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
-//     ['-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
-// ];
+const map = [// i    i    i    i     //.forEach(row, i)
+    ['-', '-', '-', '-', '-', '-',], // j = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
+    ['-', ' ', ' ', ' ', ' ', '-',], // j = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', '-', '-', ' ', '-',], // j = 2              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
+    ['-', ' ', ' ', ' ', ' ', '-',], // j = 3              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
+    ['-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
+];
 const boundaries = [];                  // questo array viene popolato DINAMICAMENTE tramite .push() di istanze Boundary grazie al .forEach() su symbol dentro il .forEach() di map.
+
 // le istanze dei giocatori:
 const player = new Player({          // tra parentesi metti i parametri da mandare al constructor per inizializzare 'this'
     position: {
@@ -72,29 +72,6 @@ const player = new Player({          // tra parentesi metti i parametri da manda
         y: 0
     }
 })                                 // per poter visualizzare la istanza devi fare la call di draw() che sta nella classe;
-
-const keys = {
-    w: {
-        pressed: false
-    },
-    s: {
-        pressed: false
-    },
-    a: {
-        pressed: false
-    },
-    d: {
-        pressed: false
-    }
-}
-
-const map = [
-    ['-', '-', '-', '-', '-', '-',],
-    ['-', ' ', ' ', ' ', ' ', '-',],
-    ['-', ' ', '-', '-', ' ', '-',],
-    ['-', ' ', ' ', ' ', ' ', '-',],
-    ['-', '-', '-', '-', '-', '-',]
-];
 
 map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x: 40 * j;
     {
@@ -121,75 +98,38 @@ map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x
         )
      }
 )
-// anima la mappa -personaggi e movimenti, di frame in frame
-/// animate () riaggiorna draw() di player e il draw() e i velocity di player() ovvero player.update() in questo infiniteloop. se non fai la call di animate() non parte niente;
-// aggiorni di continuo la mappa ridisegnandola in base a boundaries. inoltre, riaggiorni il player position con update
-// fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
-// infinte brakes: take of only when bool 'pressed' in keys changes
 
-function animate() {
+/// animate () riaggiorna draw() di player e il draw() e i velocity di player() ovvero player.update() in questo infiniteloop. se non fai la call di animate() non parte niente;
+function animate() {                    // aggiorni di continuo la mappa ridisegnandola in base a boundaries. inoltre, riaggiorni il player position con update
     requestAnimationFrame(animate)
-    c.clearRect(0,0, canvas.width, canvas.height)
-    boundaries.forEach((boundary) => {
-        boundary.draw();
+
+    boundaries.forEach((boundary) => {    // fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
+    boundary.draw();
     })
     
-        player.update();
-        player.velocity = 0;
-
-    if (keys.w.pressed) {
-        player.velocity.y = -5;
-    } else if (keys.a.pressed) {
-        player.velocity.x = -5;
-    } else if (keys.s.pressed) {
-        player.velocity.y = 5;
-    } else if (keys.d.pressed) {
-        player.velocity.x = 5;
-    }
+    player.update();
 }
 
 animate()
 
 
 
-
-addEventListener('keydown', ({ key }) => {                // event listener to change state of bools in 'keys'
+addEventListener('keydown', ({ key }) => {
 switch(key){
     case 'w':
-        keys.w.pressed = true
-        console.log(keys.w.pressed)
+        player.velocity.y  = -5;
         break;
     case 'a':
-        keys.a.pressed = true
-        console.log(keys.a.pressed)
+        player.velocity.x  = -5;
         break;
     case 's':
-        keys.s.pressed = true
+        player.velocity.y  = 5;
         break;
-        case 'd':
-            keys.d.pressed = true
-            break;
-        }
-    }
-)
-    
-    addEventListener('keyup', ({key}) => {
-        switch(key){
-        case 'w':
-            keys.w.pressed = false
-            console.log(keys.w.pressed)
-            console.log(0)
-            break;
-            case 'a':
-                keys.a.pressed = false
-                console.log(keys.a.pressed)
-                break;
-        case 's':
-            keys.s.pressed = false
-            break;
-        case 'd':
-            keys.d.pressed = false
-        }
-    }
-)
+    case 'd':
+        player.velocity.x  = 5;
+        break;
+}
 
+console.log(player.velocity)
+  }
+)
