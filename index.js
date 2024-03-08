@@ -129,23 +129,52 @@ function animate() {                    // aggiorni di continuo la mappa ridiseg
     c.clearRect(0,0, canvas.width, canvas.height)
 
     if (keys.w.pressed && lastKey === 'w') {
-     boundaries.forEach((boundary) => {
-            if (circleCollidesWithRectangle({circle: player , rectangle: boundary}) ) {
+        for (let i = 0; i < boundaries.length; i++)  {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                circle: {
+                    ...player,
+                     velocity: {
+                    x: 0,
+                    y: -5
+                     }
+                },
+                rectangle: boundary
+            })
+            ) {
                 player.velocity.y = 0;
+                break;
             } else {
                 player.velocity.y = -5;
             }
-     })
-
+        }
     }  else if (keys.a.pressed && lastKey === 'a') {
         player.velocity.x = -5
         console.log(player.velocity.x + player.position.x)
     }
     else if (keys.s.pressed && lastKey === 's') {
-        player.velocity.y = 5
-        console.log(player.velocity.y + player.position.y)
+        for (let i = 0; i < boundaries.length; i++)  {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                circle: {
+                    ...player,
+                     velocity: {
+                    x: 0,
+                    y: 5
+                     }
+                },
+                rectangle: boundary
+            })
+            ) {
+                player.velocity.y = 0;
+                break;
+            } else {
+                player.velocity.y = 5;
+            }
     }
-    else if (keys.d.pressed && lastKey === 'd') {
+ } else if (keys.d.pressed && lastKey === 'd') {
         player.velocity.x = 5
         console.log(player.velocity.x + player.position.x)
     }
