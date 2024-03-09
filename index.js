@@ -84,8 +84,10 @@ const map = [// i    i    i    i     //.forEach(row, i)    row e' l'array curren
     ['-', '-', '-', '-', '-', '-', '-',], // j = 0              // treat each element of the array as a 'row' in the parameter of the map.forEach()
     ['-', ' ', ' ', ' ', ' ', ' ', '-',], // j = 1              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
     ['-', ' ', '-', ' ', '-', ' ', '-',], // j = 2              // inspect each string within each 'row' by assigning a nested .forEach() to row within the 'row' scope.
-    ['-', ' ', ' ', ' ', ' ', ' ', '-',], // j = 3              // nel nested .forEach() usa uno switch su (symbol): case '-' boundary.draw() mentre case ' ' non fare nulla;
-    ['-', '-', '-', '-', '-', '-', '-',]  // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
+    ['-', ' ', ' ', ' ', ' ', ' ', '-',],
+    ['-', ' ', '-', ' ', '-', ' ', '-',],
+    ['-', ' ', ' ', ' ', ' ', ' ', '-',],
+    ['-', '-', '-', '-', '-', '-', '-',]     // j = 4              // se '-', metti una istanza DENTRO L'ARRAY boundaries.
 ];
 map.forEach((row, j) =>  // il parametro j applicato ad x === ai cols di maps. x: 40 * j;
     {
@@ -128,6 +130,8 @@ function animate() {                    // aggiorni di continuo la mappa ridiseg
     requestAnimationFrame(animate)
     c.clearRect(0,0, canvas.width, canvas.height)
 
+
+    // COLLISION LOGIC
     if (keys.w.pressed && lastKey === 'w') {
         for (let i = 0; i < boundaries.length; i++)  {
             const boundary = boundaries[i]
@@ -150,8 +154,25 @@ function animate() {                    // aggiorni di continuo la mappa ridiseg
             }
         }
     }  else if (keys.a.pressed && lastKey === 'a') {
-        player.velocity.x = -5
-        console.log(player.velocity.x + player.position.x)
+        for (let i = 0; i < boundaries.length; i++)  {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                circle: {
+                    ...player,
+                     velocity: {
+                    x: -5,
+                    y: 0                     }
+                },
+                rectangle: boundary
+            })
+            ) {
+                player.velocity.x = 0;
+                break;
+            } else {
+                player.velocity.x = -5;
+            }
+        }
     }
     else if (keys.s.pressed && lastKey === 's') {
         for (let i = 0; i < boundaries.length; i++)  {
@@ -175,8 +196,25 @@ function animate() {                    // aggiorni di continuo la mappa ridiseg
             }
     }
  } else if (keys.d.pressed && lastKey === 'd') {
-        player.velocity.x = 5
-        console.log(player.velocity.x + player.position.x)
+    for (let i = 0; i < boundaries.length; i++)  {
+        const boundary = boundaries[i]
+        if (
+            circleCollidesWithRectangle({
+            circle: {
+                ...player,
+                 velocity: {
+                x: 5,
+                y: 0                     }
+            },
+            rectangle: boundary
+        })
+        ) {
+            player.velocity.x = 0;
+            break;
+        } else {
+            player.velocity.x = 5;
+        }
+    }
     }
 
     boundaries.forEach((boundary) => {    // fai il rendering di ogni blocco istanza di newBoundary creato col for each su map
