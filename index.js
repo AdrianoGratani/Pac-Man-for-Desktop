@@ -415,7 +415,7 @@ const stop = 0
             player.velocity.x = stop;
             break;
         } else {
-            player.velocity.x = v;
+            player.velocity.x = v; //
         }
     }
     }
