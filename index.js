@@ -1,10 +1,11 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
+const scoreEl = document.getElementById('scoreEl')
+
 canvas.width = innerWidth;     // `innerWidth` stands for `window.innerWidth`. the `window` object is provided BY DEFAULT  by the browser
 canvas.height = innerHeight;   // `innerWidth` stands for `window.innerWidth`. the `window` object is provided BY DEFAULT  by the browser
                                // `window` is like a library of methods and properties.
                                //  still the browser applies some DEFAULT MARGIN to the BODY element: 8px, top and left.
-console.log(canvas);
 
 class Boundary {
     static width = 40;     // x   reference this static in your code below using the dot notation (class === obj sintax);
@@ -84,7 +85,7 @@ const keys = {
 }
 
 let lastKey = ''
-
+let score= 0
 const map =[
     [ '1', '-', '-', '-', '-', '-', '-', '-', '-', '-', '2' ],
     [ '|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|' ],
@@ -415,19 +416,20 @@ const stop = 0
             player.velocity.x = stop;
             break;
         } else {
-            player.velocity.x = v; //
+            player.velocity.x = v;
         }
     }
     }
 
- 
+ // PELLETS EATER
     for (let i = pellets.length -1; 0 < i; i--) {
         const pellet = pellets[i]
         pellet.draw()
 
         if (Math.hypot(pellet.position.x - player.position.x, pellet.position.y - player.position.y) < pellet.radius + player.radius){
-            console.log('touching')
             pellets.splice(i, 1)
+            score += 10
+            scoreEl.innerHTML =score
         }
     }
     
