@@ -90,19 +90,11 @@ const map =[
     [ '|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|' ],
     [ '|', '.', 'B', '.', '[', '7', ']', '.', 'B', '.', '|' ],
     [ '|', '.', '.', '.', '.', '_', '.', '.', '.', '.', '|' ],
-    [ '|', '.', '[', ']', '.', '.', '.', '[', ']', '.', '|' ],
-    [ '|', '.', '.', '.', '.', '^', '.', '.', '.', '.', '|' ],
-    [ '|', '.', 'B', '.', '[', '+', ']', '.', 'B', '.', '|' ],
-    [ '|', '.', '.', '.', '.', '_', '.', '.', '.', '.', '|' ],
-    [ '|', '.', '[', ']', '.', '.', '.', '[', ']', '.', '|' ],
     [ '|', '.', '.', '.', '.', '^', '.', '.', '.', '.', '|' ],
     [ '|', '.', 'B', '.', '[', '5', ']', '.', 'B', '.', '|' ],
     [ '|', '.', '.', '.', '.', '.', '.', '.', '.', 'p', '|' ],
     [ '4', '-', '-', '-', '-', '-', '-', '-', '-', '-', '3' ]
 ];
-
-
-
 
 function createImage(src){
     const image = new Image()
@@ -425,7 +417,14 @@ function animate() {
     }
     }
 
-    pellets.forEach(pellet => pellet.draw())
+    pellets.forEach((pellet, i) => {
+        pellet.draw()
+
+        if (Math.hypot(pellet.position.x - player.position.x, pellet.position.y - player.position.y) < pellet.radius + player.radius){
+            console.log('touching')
+            pellets.splice(i, 1)
+        }
+    })
 
     boundaries.forEach((boundary) => {
         boundary.draw();
