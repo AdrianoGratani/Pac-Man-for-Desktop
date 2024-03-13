@@ -55,7 +55,7 @@ class Pellet{
     draw(){
         c.beginPath();
         c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-        c.fillStyle = 'white';
+        c.fillStyle = 'pink';
         c.fill();
         c.closePath();
     }
@@ -330,8 +330,11 @@ function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0,0, canvas.width, canvas.height)
 
+// velocity
+const v = 3
+const stop = 0
 
-    // COLLISION LOGIC
+    // COLLISION LOGIC and VELOCITY
     if (keys.w.pressed && lastKey === 'w') {
         for (let i = 0; i < boundaries.length; i++)  {
             const boundary = boundaries[i]
@@ -341,16 +344,16 @@ function animate() {
                     ...player,
                      velocity: {
                     x: 0,
-                    y: -5
+                    y: -v
                      }
                 },
                 rectangle: boundary
             })
             ) {
-                player.velocity.y = 0;
+                player.velocity.y = stop;
                 break;
             } else {
-                player.velocity.y = -5;
+                player.velocity.y = -v;
             }
         }
     }  else if (keys.a.pressed && lastKey === 'a') {
@@ -361,16 +364,16 @@ function animate() {
                 circle: {
                     ...player,
                      velocity: {
-                    x: -5,
+                    x: -v,
                     y: 0                     }
                 },
                 rectangle: boundary
             })
             ) {
-                player.velocity.x = 0;
+                player.velocity.x = stop;
                 break;
             } else {
-                player.velocity.x = -5;
+                player.velocity.x = -v;
             }
         }
     }
@@ -383,16 +386,16 @@ function animate() {
                     ...player,
                      velocity: {
                     x: 0,
-                    y: 5
+                    y: v
                      }
                 },
                 rectangle: boundary
             })
             ) {
-                player.velocity.y = 0;
+                player.velocity.y = stop;
                 break;
             } else {
-                player.velocity.y = 5;
+                player.velocity.y = v;
             }
     }
  } else if (keys.d.pressed && lastKey === 'd') {
@@ -403,28 +406,31 @@ function animate() {
             circle: {
                 ...player,
                  velocity: {
-                x: 5,
+                x: v,
                 y: 0                     }
             },
             rectangle: boundary
         })
         ) {
-            player.velocity.x = 0;
+            player.velocity.x = stop;
             break;
         } else {
-            player.velocity.x = 5;
+            player.velocity.x = v;
         }
     }
     }
 
-    pellets.forEach((pellet, i) => {
+ 
+    for (let i = pellets.length -1; 0 < i; i--) {
+        const pellet = pellets[i]
         pellet.draw()
 
         if (Math.hypot(pellet.position.x - player.position.x, pellet.position.y - player.position.y) < pellet.radius + player.radius){
             console.log('touching')
             pellets.splice(i, 1)
         }
-    })
+    }
+    
 
     boundaries.forEach((boundary) => {
         boundary.draw();
