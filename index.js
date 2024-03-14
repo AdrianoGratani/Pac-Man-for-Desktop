@@ -53,6 +53,7 @@ class Ghost {
         this.velocity = velocity;
         this.radius = 18;
         this.color = color;
+        this.prevCollisions = []
     }
 
     draw(){
@@ -554,7 +555,13 @@ const stop = 0
                 collisions.push('down')
                }
         })
-        console.log(collisions)
+        if (collisions.length > ghost.prevCollisions.length) {
+            ghost.prevCollisions = collisions
+        }
+            
+        if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)){
+            console.log('gogogo')
+        }
     })
 }
 
