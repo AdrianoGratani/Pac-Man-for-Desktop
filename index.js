@@ -560,7 +560,16 @@ const stop = 0
         }
             
         if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)){
-            console.log('gogogo')
+            console.log(collisions)
+            console.log(ghost.prevCollisions)
+            if (ghost.velocity.x > 0) {
+                ghost.prevCollisions.push('right')
+            }
+            const pathways = ghost.prevCollisions.filter(collision => {
+                     return !collisions.includes(collision)
+                    }
+                    )
+            console.log({pathways})
         }
     })
 }
