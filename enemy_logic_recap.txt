@@ -1,0 +1,56 @@
+enemy e' una copia di player
+aggiungi il color per farlo rosso come fallback
+nel suo constructor
+e fai
+this.color = color
+cosi puoi usare color nelle class funnctions
+
+crea un rray ghost
+dentro ci metti dele istanze
+come parametri gli dai position
+e velocity
+sono {} con dentro x ed y
+
+fai update del ghost dentro animate()
+
+ghost.forEach(
+ update di ghost
+}
+
+posizione
+vai nella istanza dentro ghosts
+cambia x e y con la position
+di player instance
+moltiplia la width di ghost per distanziarlo da player
+
+sempre nel for each di ghosts
+devi mettere un detector di collisioni
+quindi mettici dentro un boundaries.forEach
+e se le sue condizioni di contatto sono vere
+allora metti la direzione del contatto in un
+array 'collisions'
+const collisions = []
+
+if ....
+(... enemy sta toccando un boundaries
+sinistro con il suo lato destro: )
+{
+	collisions.push('right')
+}
+
+ copia questa condizione per ogni direzione
+'up'
+'down'
+'left'
+
+fai push di una direzione collisione
+solo se non e' gia presente in collisions
+usa .includes come && nell'if
+if (!collisions.includes('right) && collisione right accertata) {
+     do something
+}
+
+a questo punto ti serve un altro posto
+per conservare le precedenti collisions
+metti tale array dentro ghosts
+this.prevCollisions = []
