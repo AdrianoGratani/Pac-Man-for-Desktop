@@ -54,3 +54,12 @@ a questo punto ti serve un altro posto
 per conservare le precedenti collisions
 metti tale array dentro ghosts
 this.prevCollisions = []
+
+quindi torni in animate e dopo i conditionals
+metti: se l'ultima collisione in collisions
+non e' gia presente in ghost.prevCollisions
+allora mettila dentro
+ghost.prevCollisions = collisions
+
+basta che constrolli se la length di collision
+e' superiore a quella di prevCollisions
