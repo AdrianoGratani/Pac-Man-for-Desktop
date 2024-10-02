@@ -152,3 +152,9 @@ in the same condition: forEach ghost instance in the ghosts array, it turns the 
 rendering the pellets:
 based on the map 2D array, each '.' symbol gets pushed in the pellets instances array. rendering it's easy: for each instance constructor provide the j * the size of the block / 2 (the pellet will get positioned in the middle);
 if pacman collides with a pellet, splice the pellet at [i] (we are iterating using forEach() );
+
+rendering the boundary blocks:
+as mentioned earlier, a map is a 2D array where each partition stores a certain value. if the value is '.' the pellet array gets increased by one.
+for any other case, you create an instance of Boundary with a different sprite image, according to the symbol stored in the partition.
+- the image rendering in Canvas can be quite tricky. `this.image` has to receive a function call with the address of that specific img as argument. the function in question is `createImage(src)` and  it generates a new HTML Image(), with Image.src equal to the argument src. then it returns the image so that it can be sent to the constructor.
+
