@@ -94,4 +94,9 @@ Ghost constructor:
     - the `draw()` method works the same way as for the Ghost class: same logic and same properties involved;
     - Pellets are fixed in their position, which means no update of their position is needed. that's why we don't need any `update()` method as for Ghost;
 
-  
+// ./classes/player.js = Pacman.
+
+{ Our Pacman is round-shaped and moves over the map, so the constructor is pretty similar to the Ghost. It has some more advanced implementations though, like the animation to simulate the mouth open-close on loop, signature of the original game.
+In addition, when pacman moves towards a direction, the whole shape should rotate accordingly so that the 'mouth' points towards the same direction. }
+
+
