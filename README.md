@@ -7,7 +7,11 @@ I started coding Pacman in February 2024, as a newbye. It took me around five we
 I chose this project because you need a basic understanding of algorithms and data structures to code a video game.
 How to implement the map, how to render characters and event configuration: I did everything from scratch.
 
-//////////////////////// Description:
+//////////////////////// General Game Description:
+
+- the user uses Pacman, the main character of this game, to move in a predefined map. The map contains small round-shaped pellets.
+- Goal of the game is to help Pacman in his goal of collecting each pellet. If there are no pellets left in the map, the user wins the game.
+- for sake of variety/competion, the map presents anthagonists, namely the 'ghosts'. If a ghost touches Pacman and there are still pellets left in the map, the game stops immediately, and the user lose the game.
 
 The whole Pacman game is made of four main components:
   - the map of the game;
