@@ -1,4 +1,4 @@
-Line-by-line explanation of this code, written by me.
+Line-by-line explanation of this code, written by >>> me <<<.
 Adriano Gratani, 2024
 
 //////////////////////// General informations:
