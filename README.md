@@ -71,4 +71,9 @@ Ghost constructor:
 - all these methods have to be performed inside the draw() method.
 
   The update() method for the Ghost class:
+  - Canvas renders the game 60 frames per second, which means: for every frame of the game rendering we need fresh data from the instances:
+  - where is the ghost? is it scared? any collision happened between it and Pacman? Where can it move next?
+  - an answer for each of these questions can be found in the `draw()` method, so we need to call `draw()` in the animation code.
+  - we can't just call `draw()` because we also need to update the position for both axis based on the current velocity.
+  - `update()` solves this problem: it calls `draw()` and THEN updates the the position of the instance. That's why in the animation section you call `update()` and not `draw()`;
   
