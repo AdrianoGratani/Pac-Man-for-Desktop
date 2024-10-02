@@ -149,6 +149,6 @@ rendering instances:
 - an if statements checks if the collision occurs between Pacman and Powerup, in that case it will splice() the current powerup from the array.
 in the same condition: forEach ghost instance in the ghosts array, it turns the .scared property to true, and sets the timeout to 8000ms, after which the .scared property will go back to false.
 
-
-
-
+rendering the pellets:
+based on the map 2D array, each '.' symbol gets pushed in the pellets instances array. rendering it's easy: for each instance constructor provide the j * the size of the block / 2 (the pellet will get positioned in the middle);
+if pacman collides with a pellet, splice the pellet at [i] (we are iterating using forEach() );
