@@ -109,3 +109,14 @@ The update() method:
 
 { Logic, constructor and methods are basically the same as for pellets, it's a semplified version of Ghost class. It cannot move.}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////// the ANIMATION method /////////////////// 
+
+// ./animate.js = this js manages the whole logic of the game:
+                  - sets the infinite loop for animate the canvas (based on win-lose conditionals);
+                  - renders the instances, based on conditionals (pellet eaten or not, Ghosts eaten or not, etc...);
+                  - calls the collisions dector (pacman-walls / pacman-ghosts / pacman-pellets ..same for ghosts);
+                  - sets the event listeners for Pacman;
+                  - sets the 'AI' for the ghosts;
+                  - 'beat the game' conditions;
