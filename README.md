@@ -1,3 +1,5 @@
+Adriano Gratani, 2024
+
 General informations:
 
 I started coding Pacman in February 2024, as a newbye. It took me around five weeks to finish it.
@@ -41,6 +43,15 @@ the map it's made of small blocks, each one is the instance of a class named `Bo
 
   { enemies has same shape and size as Pacman, they move up, down, right and left, just like Pacman, but slighty slower.
   the animation logic of the game implements a function which detect collision between ghosts and Pacman, based on conditionals.
-  if the collision occurs, the game stops and the player loses the game. }
+  if the collision occurs, the game stops and the player loses the game.
+  Ghost can get scared if Pacman eats the special bonus, in that case they change color for a brief moment, and the conditionals get reverted: now Pacman can eat the ghosts! }
 
+constructor:
+- the speed of each Ghost has to be fixed, so I just implemented a static variable;
+- position is randomly generated, so it has to be decided or randomized using arguments. that's why `this.position = position`, where the second `position` is provided to the constructor.
+- velocity is the property to set the direction of the ghost, based on Canvas X and Y axis.
+      - positive X means move towards right.
+      - negative X means move towards left.
+      - positive Y means move towards the bottom.
+      - negative Y means move towards the top.
   
