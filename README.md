@@ -96,7 +96,7 @@ Ghost constructor:
 
 // ./classes/player.js = Pacman.
 
-{ Our Pacman is round-shaped and moves over the map, so the constructor is pretty similar to the Ghost. It has some more advanced implementations though, like the animation to simulate the mouth open-close on loop, signature of the original game.
+{ Please refere to the Ghost class for the constructor and methods. Our Pacman is round-shaped and moves over the map, so the constructor is pretty similar to the Ghost. It has some more advanced implementations though, like the animation to simulate the mouth open-close on loop, signature of the original game.
 In addition, when pacman moves towards a direction, the whole shape should rotate accordingly so that the 'mouth' points towards the same direction. }
 
 
