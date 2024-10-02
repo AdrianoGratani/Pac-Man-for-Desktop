@@ -111,7 +111,12 @@ The update() method:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////// the ANIMATION method /////////////////// 
+/////////////////// the ANIMATION /////////////////// 
+
+// ./index.js = it contains all the instances for each class.
+
+All the instances (except for Pacman) are stored in arrays. the ghost array is populated by default at the beginning from index.js with two instances.
+
 
 // ./animate.js = this js manages the whole logic of the game:
 
@@ -131,12 +136,19 @@ animate.js constist of three parts:
 // the event listeners:
 - user can move pacman towards four directions: up, down, right and left. ./index.js sets the `keys` object which stores four keys: w a s d. each of these has an object as value, and each object stores the key pressed, set by default to false, so when the user presses one of these keys, we want to set the value stored in this object to `true`. We also want to store the last key pressed in a variable to avoid issues in case the user is pressing more than one button at the time.
 
-- the event listener is basically a switch statement. we need two of them, one to monitorate the `'keydown'`  and one for the `'keyup'` DOM events. 
+- the event listener is basically a switch statement. we need two of them, one to monitorate the `'keydown'`  and one for the `'keyup'` DOM events. in case of `'keydown'`, it will switch the key checking which case is true: 'w' 'a' , 's', or 'd'.
+once the true case is found, will set the `keys.{w/a/s/d}.pressed` to `true` and `lastKey` to the same key. Same logic applied to  `'keyup'` but in reverse (`false` instead of `true`)
 
 // `animate()` function:
 
 - calls itself, recursively, within `requestAniimationFrame()`. This will generate an infinite loop to display the Canvas.
 - after that, it does `clearRect()` to avoid superimpositions of the previous frame. in Canvas each frame has to be displayed on an empty canvas. otherwise user will see traces of previous frames still rendering on the screen;
-- 
+
+rendering instances:
+- there's a Timeout which populates the powerup instances array. for each powerup instance you call `powerup.draw()`
+- an if statements checks if the collision occurs between Pacman and Powerup, in that case it will splice() the current powerup from the array.
+in the same condition: forEach ghost instance in the ghosts array, it turns the .scared property to true, and sets the timeout to 8000ms, after which the .scared property will go back to false.
+
+
 
 
