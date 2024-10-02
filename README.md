@@ -86,4 +86,8 @@ Ghost constructor:
 
   { pellets are distributed in every single path-block of the map (a path-block is just an empty block, it's not an instance of Boundary.) When Pacman steps over a pellet, the pellet gets 'eaten', which means it disappeears from the Canvas and gets garbage collected from the instances array.  [the instance-array concept will be explained later]}
 
+  Pellet constructor:
+  - property for the radius (pellet is round-shaped) set to a fallback integer;
+  - property `.position` to determine where to render each pellet and which pellet has to be garbage collected;
+
   
