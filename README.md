@@ -82,3 +82,5 @@ Ghost constructor:
   - we can't just call `draw()` because we also need to update the position for both axis based on the current velocity.
   - `update()` solves this problem: it calls `draw()` and THEN updates the the position of the instance. That's why in the animation section you call `update()` and not `draw()`;
   
+// ./classes/pellet.js = Pacman's goal is to collect these instances in the map;
+
