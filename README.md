@@ -157,4 +157,10 @@ rendering the boundary blocks:
 as mentioned earlier, a map is a 2D array where each partition stores a certain value. if the value is '.' the pellet array gets increased by one.
 for any other case, you create an instance of Boundary with a different sprite image, according to the symbol stored in the partition.
 - the image rendering in Canvas can be quite tricky. `this.image` has to receive a function call with the address of that specific img as argument. the function in question is `createImage(src)` and  it generates a new HTML Image(), with Image.src equal to the argument src. then it returns the image so that it can be sent to the constructor.
+- Recap: we have an array map made out of symbols. we iterate over the array with a nested forEach and switch between different symbols.
+- in case the match symbole/switch case is satisfied, we .push() in the boundaries array a new Instance of a boundary.
+- its position on the x axis: we use the `i` iterator (row pointer from outer forEach()) multiplied by `this.width` (which is a fallback)
+- its position on the y axis: we use the `j` iterator from the nested forEach as a column counter, mutiplied by `this.height` (again, a fallback value provided to the constructor).
 
+  powerups rendering:
+  - the map array stores a 'special symbol' for the powerup: the switch will take care of this case, inside the nested forEach();
