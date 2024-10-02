@@ -1,4 +1,4 @@
-Line-by-line explanation of this code.
+Line-by-line explanation of this code, written by me.
 Adriano Gratani, 2024
 
 //////////////////////// General informations:
@@ -61,4 +61,11 @@ Ghost constructor:
 - Ghost are aggressive , but they can get scared, if Pacman eats the bonus. by default, the `this.scared` property has its fallback set to `false`.
 - AI OF THE GHOST:
 - Ghost are not controlled by human player. Still, they move, they avoid the walls, they have to change direction.
-  each ghost has its own 'memory' of the previous directions and where he comes from. `this.prevCollisions` is set to an empty array. This is the most difficult part of the game, it will discussed further in this file.
+  each ghost has its own 'memory' of the previous directions and where he comes from. `this.prevCollisions` is set to an empty array. This is the most difficult part of the game, it will discussed further in this file once we get a solid understanding of the whole logic of animations etc..
+
+  The draw() method for the Ghost:
+  - to draw a shape (a shape, not a sprite Image), using Canvas, we need to implement some context methods. First the .beginPath() method:
+  - then, we want the Ghost to be round, so we use the context.arc() method, which takes arguments for rendering positions on both axis, radius degree, starting drawing degree and finishing degree.
+  - we use .fillStyle() method to color the Ghost. But we want to check if the Ghost is scared or not. Based on the value stored by `this` in the `scared` property, we decide which color has to be assigned. That's why the .fillStyle is set to a ES6 ternary operator based on `this.scared`.
+
+  
