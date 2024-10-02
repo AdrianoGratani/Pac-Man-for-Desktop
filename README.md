@@ -105,4 +105,5 @@ The draw() method: mouth animation:
 The update() method:
 - same as Ghost, calls `draw()` and checks with a conditional which Pacman-mouth-animation phase has to be performed (based on radians current value, openRate has to increase or lower down?)
 
+// ./classes/powerup.js = if Pacman catches a powerup, he can eat the Ghosts.
 
