@@ -118,6 +118,21 @@ The update() method:
                   - sets the infinite loop for animate the canvas (based on win-lose conditionals);
                   - renders the instances, based on conditionals (pellet eaten or not, Ghosts eaten or not, etc...);
                   - calls the collisions dector (pacman-walls / pacman-ghosts / pacman-pellets ..same for ghosts);
-                  - sets the event listeners for Pacman;
+                  - sets the event listeners to move Pacman;
                   - sets the 'AI' for the ghosts;
                   - 'beat the game' conditions;
+                  - ghosts rendering and collision conditionals based on powerup eaten;
+
+animate.js constist of three parts:
+  - the `animate()` function scope;
+  - the `animate()` call;
+  - the event listeners for Pacman movements;
+
+// `animate()` function:
+
+- calls itself, recursively, within `requestAniimationFrame()`. This will generate an infinite loop to display the Canvas.
+- after that, it does `clearRect()` to avoid superimpositions of the previous frame. in Canvas each frame has to be displayed on an empty canvas. otherwise user will see traces of previous frames still rendering on the screen;
+
+- 
+
+
