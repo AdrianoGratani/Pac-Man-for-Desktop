@@ -2,9 +2,9 @@
 # [ Written by >>> me <<<. ] #
 Adriano Gratani, 2024
 
-//////////////////////// General informations:
+//////////////////////// General information:
 
-I started coding Pacman in February 2024, as a newbye. It took me around five weeks to finish it.
+I started coding Pacman in February 2024, as a newbie. It took me around five weeks to finish it.
 I chose this project because you need a basic understanding of algorithms and data structures to code a video game.
 How to implement the map, how to render characters and event configuration: I did everything from scratch.
 
@@ -12,9 +12,9 @@ How to implement the map, how to render characters and event configuration: I di
 
 - the user uses Pacman, the main character of this game, to move in a predefined map. The map contains small round-shaped pellets.
 - Goal of the game is to help Pacman in his goal of collecting each pellet. If there are no pellets left in the map, the user wins the game.
-- for sake of variety/competion, the map presents anthagonists, namely the 'ghosts'. If a ghost touches Pacman and there are still pellets left in the map, the game stops immediately, and the user lose the game.
+- for sake of variety/competion, the map presents antagonists, namely the 'ghosts'. If a ghost touches Pacman and there are still pellets left in the map, the game stops immediately, and the user lose the game.
 
-The whole Pacman game is made of four main components:
+The whole Pacman game is made of five main components:
   - the map of the game;
   - the player character;
   - the enemies;
@@ -35,7 +35,7 @@ To achieve better readability of the code, I chose modularity. As mentioned earl
   which different arguments for Image and position (x and y), the image rendered depends on the symbol stored in the partition.
   Evaluation for sprite assignment is performed through switch statements. }
 
-the map it's made of small blocks, each one is the instance of a class named `Boundary`, which provides:
+the map is made of small blocks, each one is the instance of a class named `Boundary`, which provides:
 1. some static data for width and height for each block.
 2. The Boundary constructor, which implements two arguments:
   - one for the position of the Boundary;
@@ -48,7 +48,7 @@ the map it's made of small blocks, each one is the instance of a class named `Bo
     
 // ./classes/ghost.js = the enemies of Pacman.
 
-  { enemies has same shape and size as Pacman, they move up, down, right and left, just like Pacman, but slighty slower.
+  { enemies has same shape and size as Pacman, they move up, down, right and left, just like Pacman, but slightly slower.
   the animation logic of the game implements a function which detect collision between ghosts and Pacman, based on conditionals.
   if the collision occurs, the game stops and the player loses the game.
   Ghost can get scared if Pacman eats the special bonus, in that case they change color for a brief moment, and the conditionals get reverted: now Pacman can eat the ghosts! }
@@ -84,11 +84,11 @@ Ghost constructor:
   
 // ./classes/pellet.js = Pacman's goal is to collect these instances in the map;
 
-  { pellets are distributed in every single path-block of the map (a path-block is just an empty block, it's not an instance of Boundary.) When Pacman steps over a pellet, the pellet gets 'eaten', which means it disappeears from the Canvas and gets garbage collected from the instances array.  [the instance-array concept will be explained later]}
+  { pellets are distributed in every single path-block of the map (a path-block is just an empty block, it is not an instance of Boundary.) When Pacman steps over a pellet, the pellet gets 'eaten', which means it disappears from the Canvas and gets garbage collected from the instances array.  [the instance-array concept will be explained later]}
 
   Pellet constructor:
   - property for the radius (pellet is round-shaped) set to a fallback integer;
-  - property `.position` to determine where to render each pellet and which pellet has to be garbage collected. Position is dynamic, cannot be fixed, so is initialized to the argument value sent to the constructor;
+  - property `.position` to determine where to render each pellet and which pellet has to be garbage collected. Position is dynamic, cannot be fixed, so it is initialized to the argument value sent to the constructor;
 
   The draw() method:
     - the `draw()` method works the same way as for the Ghost class: same logic and same properties involved;
@@ -141,7 +141,7 @@ once the true case is found, will set the `keys.{w/a/s/d}.pressed` to `true` and
 
 // `animate()` function:
 
-- calls itself, recursively, within `requestAniimationFrame()`. This will generate an infinite loop to display the Canvas.
+- calls itself, recursively, within `requestAnimationFrame()`. This will generate an infinite loop to display the Canvas.
 - after that, it does `clearRect()` to avoid superimpositions of the previous frame. in Canvas each frame has to be displayed on an empty canvas. otherwise user will see traces of previous frames still rendering on the screen;
 
 rendering instances:
@@ -171,7 +171,7 @@ for any other case, you create an instance of Boundary with a different sprite i
 
 we don't want Pacman to step over blocks: we need to set boundaries.
 we don't want neither to block Pacman: it should move constantly, giving the impression of constantly and gracefully avoiding contact with aforementioned blocks.
-if pacman touches the block, velocity turns 0. ... and we want to avoid that.
+if pacman touches the block, velocity turns 0. ...and we want to avoid that.
 
 - set multiple `if` ...`else if` statements, based on both key pressed `&&` last key pressed. if a match is found we access the conditional scope.
 - a `for` loop checks over the whole `length` of the boundary instance array: if a collision between pacman is detected (to check this occurrence we just need a collision conditional function which takes as parameters one `circle` object with two keys: first the `...player` instance, second key is the velocity.
