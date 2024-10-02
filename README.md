@@ -15,16 +15,20 @@ The whole Pacman game is made of four main components:
 
 the map, the player and the enemies are instances of their class: this project is intended to learn good oop principles.
 
-//////////////////////////////////////////////////////
+//////////////////////// CLASSES implemented for this game //////////////////////////////
 
-the map: it's made of small blocks, each one is the instance of a class named `Boundary`, which provides
+To achieve better readability of the code, I chose modularity. As mentioned earlier, building blocks and characters are instances of classes. Each class has its own file .js, in the ./classes folder.
 
+// ./classes/boundary.js = the building of the map of the game.
+
+the map it's made of small blocks, each one is the instance of a class named `Boundary`, which provides:
 1. some static data for width and height for each block.
-
-2. The Boundary constructor implements two arguments:
+2. The Boundary constructor, which implements two arguments:
   - one for the position of the Boundary;
   - one for the Sprite image of the Boundary instance;
-  - of course, width and height constructor rely on fallback data to avoid discrepancies over the map;
+  - ( of course, width and height constructor rely on fallback data stored in the static data, to avoid discrepancies over the map; )
     
 3. a `draw()` method, which takes no args:
-  - this method gets called in the `animation()` to draw each block. it just calls the context and uses the built in `drawImage()` with reference to both static and dynamic arguments we just assigned from the constructor (position, image, width and height)
+  - this method gets called in the `animation()` to draw each block. it just calls the context and uses the built in `drawImage()`
+  - drawImage takes three parameters, first for the sprite image (taken as constructor argument, when the instance is initialized based       on the specific partition of the map array. ...this will be explained later), second for the position of the instance on the x axis,      and thir for the position in the y axis.
+    
