@@ -72,8 +72,8 @@ Ghost constructor:
   - to draw a shape (a shape, not a sprite Image), using Canvas, we need to implement some context methods. First the .beginPath() method:
   - then, we want the Ghost to be round, so we use the context.arc() method, which takes arguments for rendering positions on both axis, radius degree, starting drawing degree and finishing degree.
   - we use .fillStyle() method to color the Ghost. But we want to check if the Ghost is scared or not. Based on the value stored by `this` instance in its `scared` property accessed through dot-notation, we decide which color has to be assigned. That's why the .fillStyle() is set to a ES6 ternary operator based on `this.scared`.
-- we need two more methods from the context: `.fill()` to color the shape we juste created with `this.color`, and `.closePath()` to 'finish the drawing'
-- all these methods have to be performed inside the draw() method.
+  - we need two more methods from the context: `.fill()` to color the shape we juste created with `this.color`, and `.closePath()` to 'finish the drawing'
+  - all these methods have to be performed inside the draw() method.
 
   The update() method for the Ghost class:
   - Canvas renders the game 60 frames per second, which means: for every frame of the game rendering we need fresh data from the instances:
@@ -88,6 +88,10 @@ Ghost constructor:
 
   Pellet constructor:
   - property for the radius (pellet is round-shaped) set to a fallback integer;
-  - property `.position` to determine where to render each pellet and which pellet has to be garbage collected;
+  - property `.position` to determine where to render each pellet and which pellet has to be garbage collected. Position is dynamic, cannot be fixed, so is initialized to the argument value sent to the constructor;
+
+  The draw() method:
+    - the `draw()` method works the same way as for the Ghost class: same logic and same properties involved;
+    - Pellets are fixed in their position, which means no update of their position is needed. that's why we don't need any `update()` method as for Ghost;
 
   
