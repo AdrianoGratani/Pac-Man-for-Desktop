@@ -1,5 +1,5 @@
 # Line-by-line explanation of my code for this project. #
-# written by >>> me <<<. #
+# [ Written by >>> me <<<. ] #
 Adriano Gratani, 2024
 
 //////////////////////// General informations:
