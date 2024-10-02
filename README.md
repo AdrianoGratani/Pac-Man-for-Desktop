@@ -107,3 +107,5 @@ The update() method:
 
 // ./classes/powerup.js = if Pacman catches a powerup, he can eat the Ghosts.
 
+{ Logic, constructor and methods are basically the same as for pellets, it's a semplified version of Ghost class. It cannot move.}
+
