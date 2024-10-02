@@ -128,11 +128,15 @@ animate.js constist of three parts:
   - the `animate()` call;
   - the event listeners for Pacman movements;
 
+// the event listeners:
+- user can move pacman towards four directions: up, down, right and left. ./index.js sets the `keys` object which stores four keys: w a s d. each of these has an object as value, and each object stores the key pressed, set by default to false, so when the user presses one of these keys, we want to set the value stored in this object to `true`. We also want to store the last key pressed in a variable to avoid issues in case the user is pressing more than one button at the time.
+
+- the event listener is basically a switch statement. we need two of them, one to monitorate the `'keydown'`  and one for the `'keyup'` DOM events. 
+
 // `animate()` function:
 
 - calls itself, recursively, within `requestAniimationFrame()`. This will generate an infinite loop to display the Canvas.
 - after that, it does `clearRect()` to avoid superimpositions of the previous frame. in Canvas each frame has to be displayed on an empty canvas. otherwise user will see traces of previous frames still rendering on the screen;
-
 - 
 
 
