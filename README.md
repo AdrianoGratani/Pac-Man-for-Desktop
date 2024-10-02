@@ -171,5 +171,10 @@ for any other case, you create an instance of Boundary with a different sprite i
 
 we don't want Pacman to step over blocks: we need to set boundaries.
 we don't want neither to block Pacman: it should move constantly, giving the impression of constantly and gracefully avoiding contact with aforementioned blocks.
+if pacman touches the block, velocity turns 0. ... and we want to avoid that.
+
+- set multiple `if` ...`else if` statements, based on both key pressed `&&` last key pressed. if a match is found we access the conditional scope.
+- a `for` loop checks over the whole `length` of the boundary instance array: if a collision between pacman is detected (to check this occurrence we just need a collision conditional function which takes as parameters one `circle` object with two keys: first the `...player` instance, second key is the velocity.
+  if the collision function returns `true` means that a collision has between found between pacman and a [i] boundary. in that case stop the velocity on the y / x axis by updating Pacman `this.velocity` and break from the loop, otherwise keep pacman with same velocity ) 
 
 
