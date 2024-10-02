@@ -164,3 +164,12 @@ for any other case, you create an instance of Boundary with a different sprite i
 
   powerups rendering:
   - the map array stores a 'special symbol' for the powerup: the switch will take care of this case, inside the nested forEach();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// COLLISION LOGIC
+
+we don't want Pacman to step over blocks: we need to set boundaries.
+we don't want neither to block Pacman: it should move constantly, giving the impression of constantly and gracefully avoiding contact with aforementioned blocks.
+
+
