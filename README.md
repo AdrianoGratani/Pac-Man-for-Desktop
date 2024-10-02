@@ -19,7 +19,12 @@ the map, the player and the enemies are instances of their class: this project i
 
 To achieve better readability of the code, I chose modularity. As mentioned earlier, building blocks and characters are instances of classes. Each class has its own file .js, in the ./classes folder.
 
-// ./classes/boundary.js = the building of the map of the game.
+// ./classes/boundary.js = the building blocks for the map of the game.
+
+{ to create the map you need various types of blocks (which are sprites). So I created a 2D array, with different symbols.
+  Then, I created a  nested loop to iterate over each partition of the array. at each step I render a sprite = initialize a Boundary
+  which different arguments for Image and position (x and y), the image rendered depends on the symbol stored in the partition.
+  Evaluation for sprite assignment is performed through switch statements. }
 
 the map it's made of small blocks, each one is the instance of a class named `Boundary`, which provides:
 1. some static data for width and height for each block.
@@ -32,3 +37,10 @@ the map it's made of small blocks, each one is the instance of a class named `Bo
   - this method gets called in the `animation()` to draw each block. it just calls the context and uses the built in `drawImage()`
   - drawImage takes three parameters, first for the sprite image (taken as constructor argument, when the instance is initialized based       on the specific partition of the map array. ...this will be explained later), second for the position of the instance on the x axis,      and thir for the position in the y axis.
     
+// ./classes/ghost.js = the enemies of Pacman.
+
+  { enemies has same shape and size as Pacman, they move up, down, right and left, just like Pacman, but slighty slower.
+  the animation logic of the game implements a function which detect collision between ghosts and Pacman, based on conditionals.
+  if the collision occurs, the game stops and the player loses the game. }
+
+  
