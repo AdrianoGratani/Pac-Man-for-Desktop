@@ -1,12 +1,13 @@
+Line-by-line explanation of this code.
 Adriano Gratani, 2024
 
-General informations:
+//////////////////////// General informations:
 
 I started coding Pacman in February 2024, as a newbye. It took me around five weeks to finish it.
 I chose this project because you need a basic understanding of algorithms and data structures to code a video game.
 How to implement the map, how to render characters and event configuration: I did everything from scratch.
 
-Description:
+//////////////////////// Description:
 
 The whole Pacman game is made of four main components:
   - the map of the game;
@@ -16,6 +17,7 @@ The whole Pacman game is made of four main components:
   - the collision detection;
 
 the map, the player and the enemies are instances of their class: this project is intended to learn good oop principles.
+
 
 //////////////////////// CLASSES implemented for this game //////////////////////////////
 
@@ -46,7 +48,7 @@ the map it's made of small blocks, each one is the instance of a class named `Bo
   if the collision occurs, the game stops and the player loses the game.
   Ghost can get scared if Pacman eats the special bonus, in that case they change color for a brief moment, and the conditionals get reverted: now Pacman can eat the ghosts! }
 
-constructor:
+Ghost constructor:
 - the speed of each Ghost has to be fixed, so I just implemented a static variable;
 - position is randomly generated, so it has to be decided or randomized using arguments. that's why `this.position = position`, where the second `position` is provided to the constructor.
 - velocity is the property to set the direction of the ghost, based on Canvas X and Y axis.
@@ -54,4 +56,9 @@ constructor:
       - negative X means move towards left.
       - positive Y means move towards the bottom.
       - negative Y means move towards the top.
-  
+- Ghosts are round shaped, so I created a `radius`property which stores a fallback value of 18 (same as Pacman);
+- Color of each Ghost is different, so `this.color` gets assigned a color argument from the constructor.
+- Ghost are aggressive , but they can get scared, if Pacman eats the bonus. by default, the `this.scared` property has its fallback set to `false`.
+- AI OF THE GHOST:
+- Ghost are not controlled by human player. Still, they move, they avoid the walls, they have to change direction.
+  each ghost has its own 'memory' of the previous directions and where he comes from. `this.prevCollisions` is set to an empty array. This is the most difficult part of the game, it will discussed further in this file.
