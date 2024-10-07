@@ -5,7 +5,7 @@ class Ghost {
         this.velocity = velocity;
         this.radius = 18;
         this.color = color;
-        this.prevCollisions = []
+        this.prevCollisions = []                        // the enemy randomly picks a direction based on his previous 'choices' which are stored in / spliced from this array
         this.speed = 2
         this.scared = false
     }
