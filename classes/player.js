@@ -10,6 +10,10 @@ class Player{
     }
 
     draw(){
+        c.save();
+        c.translate(this.position.x, this.position.y);
+        c.rotate(this.rotation);
+        c.translate(-this.position.x, -this.position.y);
         c.beginPath();
         c.arc(
             this.position.x,
@@ -22,6 +26,7 @@ class Player{
         c.fillStyle =  'yellow';
         c.fill();
         c.closePath();
+        c.restore();
     }
     
     update() {
