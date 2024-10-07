@@ -36,8 +36,8 @@ class Player{
 
         if (this.radians < 0 || this.radians > .75 ) { 
             this.openRate = -this.openRate
-            this.radians += this.openRate
         }
+            this.radians += this.openRate
 
     }
 }
