@@ -21,7 +21,8 @@ class Player{
         c.arc(
             this.position.x,
             this.position.y,
-            this.radius, 0,
+            this.radius, 
+            this.radians,
             Math.PI * 2 - this.radians
             )
         c.lineTo(this.position.x, this.position.y)
@@ -36,11 +37,9 @@ class Player{
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
-        if (this.radians > 0 ) { this.openRate = -this.openRate
+        if (this.radians < 0 || this.radians > .75 ) { this.openRate = -this.openRate
             this.radians += this.openRate
         }
-        if (this.radians < .75) { this.openRate = this.openRate
-            this.radians -= this.openRate
-        }
+
     }
 }
