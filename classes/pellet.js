@@ -1,6 +1,6 @@
 class Pellet{
     constructor({position}){
-        this.position = position;
+        this.position = position;        // it's the width * array raw iterator (outer arr === x axis). same for y-axis but with inner loop; 
         this.radius = 3;
     }
 
