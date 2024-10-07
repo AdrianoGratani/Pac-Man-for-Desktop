@@ -2,7 +2,7 @@ class Player{
     constructor({position, velocity}){
         this.position = position;
         this.velocity = velocity;
-        this.radius = 18;
+        this.radius = 15;
         this.radians = 0.75
         this.openRate = 0.12
         // FOR CONDITIONAL ROTATION
@@ -10,13 +10,6 @@ class Player{
     }
 
     draw(){
-        c.save()
-        // ROTATION MOVEMENT
-        c.translate(this.position.x, this.position.y)
-        c.rotate(this.rotation)  // I'm currently using save() and restore(), so rotate() won't affect the whole code but just my draw()de
-        c.translate(-this.position.x, -this.position.y)
-        
-
         c.beginPath();
         c.arc(
             this.position.x,
@@ -29,7 +22,6 @@ class Player{
         c.fillStyle =  'yellow';
         c.fill();
         c.closePath();
-        c.restore()
     }
     
     update() {
